@@ -1,4 +1,5 @@
 <%@page contentType="text/html; utf-8" pageEncoding="utf-8"  isELIgnored="false" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,8 +12,35 @@
 <body>
 <a href="${pageContext.request.contextPath}/user/logout">退出登录</a>
 <ul>
-    <li><a href="">管理系统</a></li>
-    <li><a href="">xx系统</a></li>
+    <shiro:hasRole name="user">
+        <shiro:hasPermission name="user:create.01">
+            <li><a href="">user管理系统</a></li>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="user:create.02">
+            <li><a href="">用户系统</a></li>
+        </shiro:hasPermission>
+    </shiro:hasRole>
+
+    <shiro:hasRole name="user">
+        <shiro:hasPermission name="user.create.01">
+            <li><a href="">user管理系统</a></li>
+        </shiro:hasPermission>
+    </shiro:hasRole>
+
+    <shiro:hasRole name="admin">
+        <shiro:hasPermission name="user:create.01">
+            <li><a href="">admin文件系统</a></li>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="user:create.02">
+            <li><a href="">硬件系统</a></li>
+        </shiro:hasPermission>
+    </shiro:hasRole>
+
+    <shiro:hasRole name="admin">
+        <shiro:hasPermission name="admin:*.*">
+            <li><a href="">admin管理系统</a></li>
+        </shiro:hasPermission>
+    </shiro:hasRole>
 </ul>
 </body>
 </html>

@@ -5,7 +5,47 @@
 
 <mapper namespace="com.jiuyuan.dao.UserDao">
     <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into t_user values(#{id},#{username},#{password},#{salt})
+        insert into user values(#{id},#{username},#{password},#{salt})
     </insert>
 
+    <select id="findByUsername" parameterType="String" resultType="User">
+        select id,username,password,salt from user
+        WHERE username = #{username}
+
+    </select>
+
+
+
+    <resultMap id="userMap" type="User">
+        <id column="uid" property="id"/>
+        <result column="uname" property="username"/>
+        <!--角色信息-->
+        <collection property="roles" javaType="list" ofType="Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="findRolesByUsername" parameterType="String" resultMap="userMap">
+         select u.username uname, u.id uid, r.id rid, r.name rname
+         from user u
+         left join user_role ur
+         on u.id = ur.uid
+         left join role r
+         on ur.rid = r.id
+         where u.username = #{username}
+    </select>
+
+
+    <select id="findPermsByRoleid" parameterType="String" resultType="permission">
+     select r.name ,p.id ,p.name
+         from role r
+         left join role_perms rp
+         on r.id = rp.rid
+         left join perms p
+         on rp.pid = p.id
+         where r.id = #{id}
+
+
+    </select>
 </mapper>

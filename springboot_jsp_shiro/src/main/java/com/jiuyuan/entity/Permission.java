@@ -5,21 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 /**
  * @author shkstart
- * @create 2021-07-23 15:26
+ * @create 2021-07-30 14:18
  */
 @Data
-@Accessors(chain = true)
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Permission {
     private String id;
-    private String username;
-    private String password;
-    private String salt;
+    private String name;
+    private String url;
 
-    private List<Role> roles;
 }

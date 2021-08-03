@@ -1,8 +1,11 @@
 package com.jiuyuan.dao;
 
+import com.jiuyuan.entity.Permission;
 import com.jiuyuan.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author shkstart
@@ -12,4 +15,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
     void save(User user);
+
+    User findByUsername(String username);
+
+    User findRolesByUsername(String username);
+
+    List<Permission> findPermsByRoleid(String rid);
 }

@@ -9,17 +9,15 @@ import java.util.List;
 
 /**
  * @author shkstart
- * @create 2021-07-23 15:26
+ * @create 2021-07-30 14:09
  */
 @Data
-@Accessors(chain = true)
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+@Accessors(chain = true)
+public class Role {
     private String id;
-    private String username;
-    private String password;
-    private String salt;
+    private String name;
 
-    private List<Role> roles;
+    private List<Permission> perms;
 }
